@@ -1,0 +1,18 @@
+body{
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+    background-color: blanchedalmond;
+    color: black;
+}
+img {
+    width: 300px;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  img:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
