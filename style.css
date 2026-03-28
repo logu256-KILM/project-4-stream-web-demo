@@ -1,18 +1,444 @@
-body{
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    text-align: center;
-    background-color: blanchedalmond;
-    color: black;
-}
-img {
-    width: 300px;
-    border-radius: 10px;
-    transition: 0.3s;
-    cursor: pointer;
-  }
+/* ===== GOOGLE FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
-  img:hover {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
+/* ===== COLOR THEME VARIABLES ===== */
+:root {
+  --bg-primary:       #1a1a2e;      /* Light black / deep dark navy */
+  --bg-secondary:     #16213e;      /* Slightly lighter dark */
+  --bg-card:          #0f3460;      /* Dark card background */
+
+  --sky-blue:         #87ceeb;      /* Sky blue */
+  --sky-blue-dark:    #4fb3d9;      /* Deeper sky blue */
+  --sky-blue-glow:    rgba(135, 206, 235, 0.25);
+
+  --light-red:        #ff6b6b;      /* Light red / coral */
+  --light-red-dark:   #e05252;
+  --light-red-glow:   rgba(255, 107, 107, 0.25);
+
+  --purple:           #b06cf5;      /* Purple */
+  --purple-dark:      #8a4fd4;
+  --purple-glow:      rgba(176, 108, 245, 0.25);
+
+  --text-primary:     #e8e8f0;      /* Near-white on dark */
+  --text-sky:         #87ceeb;
+  --text-red:         #ff6b6b;
+  --text-purple:      #c492f7;
+
+  --border-sky:       rgba(135, 206, 235, 0.35);
+  --border-purple:    rgba(176, 108, 245, 0.35);
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ===== ANIMATED BACKGROUND GRADIENT ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: 
+    radial-gradient(ellipse at top left,    rgba(135, 206, 235, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at top right,   rgba(176, 108, 245, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom,      rgba(255, 107, 107, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== NAVBAR / HEADER ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  background: rgba(22, 33, 62, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-sky);
+  box-shadow: 0 2px 20px rgba(135, 206, 235, 0.1);
+}
+
+.navbar .logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--sky-blue), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--sky-blue);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  background: var(--sky-blue-glow);
+  border-color: var(--border-sky);
+  box-shadow: 0 0 12px var(--sky-blue-glow);
+}
+
+/* ===== PAGE WRAPPER ===== */
+.page-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+/* ===== HOME PAGE - HERO ===== */
+.hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--sky-blue) 0%, var(--purple) 50%, var(--light-red) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+  text-shadow: none;
+  animation: titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+  0%, 100% { filter: brightness(1); }
+  50%       { filter: brightness(1.15); }
+}
+
+.hero p {
+  color: var(--text-purple);
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+}
+
+/* ===== ANIME CARD GRID ===== */
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.anime-card {
+  background: linear-gradient(145deg, rgba(15, 52, 96, 0.7), rgba(26, 26, 46, 0.9));
+  border: 1px solid var(--border-purple);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.35s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  position: relative;
+}
+
+.anime-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--sky-blue-glow), var(--purple-glow));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.anime-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--sky-blue);
+  box-shadow: 
+    0 8px 32px rgba(135, 206, 235, 0.25),
+    0 0 0 1px var(--sky-blue);
+}
+
+.anime-card:hover::after {
+  opacity: 1;
+}
+
+.anime-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.anime-card:hover img {
+  transform: scale(1.08);
+  opacity: 0.85;
+}
+
+.anime-card .card-body {
+  padding: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.anime-card .card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--sky-blue);
+  margin-bottom: 6px;
+}
+
+.anime-card .card-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+  color: #fff;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ===== EPISODE PAGE ===== */
+.show-header {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.show-header img {
+  width: 200px;
+  border-radius: 12px;
+  border: 3px solid var(--purple);
+  box-shadow: 0 0 24px var(--purple-glow), 0 8px 32px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.show-header img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 40px var(--purple-glow), 0 12px 48px rgba(0,0,0,0.6);
+}
+
+.show-info h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--light-red), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+}
+
+.show-info .genre-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.genre-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.genre-tag.action   { background: rgba(255, 107, 107, 0.15); color: var(--light-red);   border: 1px solid var(--light-red); }
+.genre-tag.anime    { background: rgba(176, 108, 245, 0.15); color: var(--purple);      border: 1px solid var(--purple); }
+.genre-tag.hero     { background: rgba(135, 206, 235, 0.15); color: var(--sky-blue);    border: 1px solid var(--sky-blue); }
+
+/* ===== EPISODE LIST ===== */
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-purple);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border-purple);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 22px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--sky-blue), var(--purple));
+}
+
+.episode-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+}
+
+.episode-list li a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: rgba(15, 52, 96, 0.5);
+  border: 1px solid var(--border-sky);
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.episode-list li a::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--sky-blue), var(--purple));
+  border-radius: 4px 0 0 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.episode-list li a:hover {
+  background: rgba(135, 206, 235, 0.1);
+  border-color: var(--sky-blue);
+  color: var(--sky-blue);
+  transform: translateX(6px);
+  box-shadow: 0 4px 20px var(--sky-blue-glow);
+}
+
+.episode-list li a:hover::before {
+  opacity: 1;
+}
+
+.ep-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.ep-icon {
+  margin-left: auto;
+  color: var(--sky-blue);
+  font-size: 1.1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.episode-list li a:hover .ep-icon {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* ===== BACK LINK ===== */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-red);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--light-red);
+  background: rgba(255, 107, 107, 0.08);
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  background: rgba(255, 107, 107, 0.18);
+  box-shadow: 0 0 14px var(--light-red-glow);
+  transform: translateX(-4px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 24px;
+  color: rgba(135, 206, 235, 0.5);
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(135, 206, 235, 0.12);
+  position: relative;
+  z-index: 1;
+}
+
+footer span {
+  color: var(--light-red);
+}
+
+.copyright {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: rgba(176, 108, 245, 0.45);
+  letter-spacing: 0.3px;
+}
+
+.copy-brand {
+  color: var(--purple);
+  font-weight: 600;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--sky-blue-dark), var(--purple-dark));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--purple); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .navbar { padding: 12px 16px; }
+  .hero h1 { font-size: 2rem; }
+  .show-header { flex-direction: column; align-items: flex-start; }
+  .show-header img { width: 140px; }
+  .show-info h1 { font-size: 1.7rem; }
+}
