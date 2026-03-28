@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,12 +20,19 @@
       justify-content: center;
       animation: fadeIn 0.25s ease;
     }
+
     .modal-overlay.active {
       display: flex;
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     .modal-box {
@@ -32,15 +40,23 @@
       width: 92vw;
       max-width: 900px;
       background: linear-gradient(145deg, #0f1e3a, #1a1a2e);
-      border: 1px solid rgba(135,206,235,0.3);
+      border: 1px solid rgba(135, 206, 235, 0.3);
       border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 0 60px rgba(135,206,235,0.15), 0 24px 80px rgba(0,0,0,0.7);
+      box-shadow: 0 0 60px rgba(135, 206, 235, 0.15), 0 24px 80px rgba(0, 0, 0, 0.7);
       animation: slideUp 0.3s ease;
     }
+
     @keyframes slideUp {
-      from { transform: translateY(30px); opacity: 0; }
-      to   { transform: translateY(0);    opacity: 1; }
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     /* Top bar */
@@ -49,17 +65,19 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 20px;
-      background: rgba(135,206,235,0.06);
-      border-bottom: 1px solid rgba(135,206,235,0.15);
+      background: rgba(135, 206, 235, 0.06);
+      border-bottom: 1px solid rgba(135, 206, 235, 0.15);
     }
+
     .modal-ep-title {
       font-size: 1rem;
       font-weight: 700;
       color: var(--sky-blue);
       letter-spacing: 0.5px;
     }
+
     .modal-close {
-      background: rgba(255,107,107,0.15);
+      background: rgba(255, 107, 107, 0.15);
       border: 1px solid var(--light-red);
       color: var(--light-red);
       font-size: 1.1rem;
@@ -73,10 +91,11 @@
       justify-content: center;
       flex-shrink: 0;
     }
+
     .modal-close:hover {
       background: var(--light-red);
       color: #fff;
-      box-shadow: 0 0 14px rgba(255,107,107,0.5);
+      box-shadow: 0 0 14px rgba(255, 107, 107, 0.5);
     }
 
     /* Video iframe wrapper — 16:9 */
@@ -86,6 +105,7 @@
       padding-top: 56.25%;
       background: #000;
     }
+
     .modal-video-wrap iframe {
       position: absolute;
       inset: 0;
@@ -100,11 +120,12 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 20px;
-      background: rgba(176,108,245,0.05);
-      border-top: 1px solid rgba(176,108,245,0.15);
+      background: rgba(176, 108, 245, 0.05);
+      border-top: 1px solid rgba(176, 108, 245, 0.15);
       gap: 12px;
       flex-wrap: wrap;
     }
+
     .modal-nav-btn {
       display: flex;
       align-items: center;
@@ -118,40 +139,47 @@
       font-weight: 600;
       transition: all 0.25s ease;
     }
+
     .btn-prev {
-      background: rgba(176,108,245,0.15);
+      background: rgba(176, 108, 245, 0.15);
       color: var(--purple);
       border: 1px solid var(--purple);
     }
+
     .btn-prev:hover {
       background: var(--purple);
       color: #fff;
-      box-shadow: 0 0 16px rgba(176,108,245,0.4);
+      box-shadow: 0 0 16px rgba(176, 108, 245, 0.4);
     }
+
     .btn-next {
-      background: rgba(135,206,235,0.15);
+      background: rgba(135, 206, 235, 0.15);
       color: var(--sky-blue);
       border: 1px solid var(--sky-blue);
     }
+
     .btn-next:hover {
       background: var(--sky-blue-dark);
       color: #fff;
-      box-shadow: 0 0 16px rgba(135,206,235,0.4);
+      box-shadow: 0 0 16px rgba(135, 206, 235, 0.4);
     }
+
     .btn-prev:disabled,
     .btn-next:disabled {
       opacity: 0.3;
       cursor: not-allowed;
       box-shadow: none;
     }
+
     .modal-ep-counter {
       font-size: 0.82rem;
-      color: rgba(135,206,235,0.6);
+      color: rgba(135, 206, 235, 0.6);
       text-align: center;
       flex: 1;
     }
   </style>
 </head>
+
 <body>
 
   <!-- ===== VIDEO MODAL ===== -->
@@ -216,7 +244,8 @@
   <!-- FOOTER -->
   <footer>
     <p>Made with <span>♥</span> for Tamil anime fans &nbsp;|&nbsp; αηιмєѕ தமிழ்</p>
-    <p class="copyright">&copy; 2025 <span class="copy-brand">αηιмєѕ தமிழ்</span>. All rights reserved. Unauthorized reproduction or distribution is prohibited.</p>
+    <p class="copyright">&copy; 2026 <span class="copy-brand">αηιмєѕ தமிழ்</span>. All rights reserved. Unauthorized
+      reproduction or distribution is prohibited.</p>
   </footer>
 
   <script>
@@ -236,7 +265,7 @@
       { id: '1IXFocVMtX8QyC8hmVVNhNLV54bFRdemE' },
       { id: '1oya7Lnvyoo3V6wd49TbNAPLemZ30DPnX' },
       { id: '1xpWkaXvapoQYP08rpIS0ubXqczDPFqdV' },
-      { id: '115_qyJRp2ECIQhIMdTwRYSOEZYt6lHcb'  },
+      { id: '115_qyJRp2ECIQhIMdTwRYSOEZYt6lHcb' },
       { id: '1vKbxDzoUa9g83TA3g7RMAh6nL9CEwSww' },
       { id: '16Wb6ew4fTjY9Cm06b267VDIZ23RxDowT' },
       { id: '1ixkdfIiDQeTfzr3lFd0vVv1cmMQWx-dB' },
@@ -266,13 +295,13 @@
     });
 
     // ─── Modal elements ───────────────────────────────────────────────────────
-    const modal      = document.getElementById('videoModal');
-    const iframe     = document.getElementById('modalIframe');
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('modalIframe');
     const modalTitle = document.getElementById('modalEpTitle');
-    const epCounter  = document.getElementById('epCounter');
-    const btnPrev    = document.getElementById('btnPrev');
-    const btnNext    = document.getElementById('btnNext');
-    const btnClose   = document.getElementById('modalClose');
+    const epCounter = document.getElementById('epCounter');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const btnClose = document.getElementById('modalClose');
 
     function embedUrl(fileId) {
       return `https://drive.google.com/file/d/${fileId}/preview`;
@@ -282,7 +311,7 @@
       currentEp = index;
       const ep = episodes[index];
       modalTitle.textContent = `To Be Hero X — Season 1 Episode ${index + 1}`;
-      epCounter.textContent  = `${index + 1} / ${total}`;
+      epCounter.textContent = `${index + 1} / ${total}`;
       iframe.src = embedUrl(ep.id);
       btnPrev.disabled = index === 0;
       btnNext.disabled = index === total - 1;
@@ -327,9 +356,16 @@
       border-color: var(--sky-blue) !important;
       color: var(--sky-blue) !important;
     }
-    .ep-link.ep-active::before { opacity: 1 !important; }
-    .ep-link.ep-active .ep-icon { opacity: 1 !important; }
+
+    .ep-link.ep-active::before {
+      opacity: 1 !important;
+    }
+
+    .ep-link.ep-active .ep-icon {
+      opacity: 1 !important;
+    }
   </style>
 
 </body>
+
 </html>
