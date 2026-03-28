@@ -7,6 +7,9 @@
     <title>Jujutsu Kaisen Season 3 — αηιмєѕ தமிழ்</title>
     <meta name="description" content="Watch Jujutsu Kaisen Season 3 all episodes in Tamil on αηιмєѕ தமிழ்.">
     <link rel="stylesheet" href="style.css">
+    <script>/* apply saved theme before paint */
+        (function () { var t = localStorage.getItem('animeTheme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();
+    </script>
     <style>
         /* ====== VIDEO MODAL ====== */
         .modal-overlay {
@@ -221,6 +224,8 @@
         <ul class="nav-links">
             <li><a href="index.html">🏠 Home</a></li>
         </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme"
+            title="Toggle theme">☀️</button>
     </nav>
 
     <!-- ===== PAGE CONTENT ===== -->
@@ -230,7 +235,7 @@
 
         <!-- SHOW HEADER -->
         <div class="show-header">
-            <img src="jjks3.jfif" alt="To Be Hero X">
+            <img src="jjks3.jpg" alt="To Be Hero X">
             <div class="show-info">
                 <h1>JUJUTSU KAISEN SEASON 3</h1>
                 <p style="color:var(--text-sky); margin-top:8px; font-size:0.95rem;">
@@ -346,6 +351,17 @@
 
         // Close on Escape key
         document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
+
+        // ─── Theme toggle ────────────────────────────────────────────────────────
+        var themeBtn = document.getElementById('themeToggle');
+        var htmlEl = document.documentElement;
+        themeBtn.textContent = htmlEl.getAttribute('data-theme') === 'light' ? '🌙' : '☀️';
+        themeBtn.addEventListener('click', function () {
+            var next = htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            htmlEl.setAttribute('data-theme', next);
+            localStorage.setItem('animeTheme', next);
+            themeBtn.textContent = next === 'light' ? '🌙' : '☀️';
+        });
     </script>
 
 </body>

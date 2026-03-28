@@ -8,6 +8,9 @@
   <meta name="description"
     content="Watch your favourite anime dubbed & subbed in Tamil. High-quality streaming for free.">
   <link rel="stylesheet" href="style.css">
+  <script>/* apply saved theme before paint to prevent flash */
+    (function () { var t = localStorage.getItem('animeTheme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();
+  </script>
 </head>
 
 <body>
@@ -18,6 +21,7 @@
     <ul class="nav-links">
       <li><a href="index.html">🏠 Home</a></li>
     </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle theme">☀️</button>
   </nav>
 
   <!-- PAGE CONTENT -->
@@ -46,7 +50,7 @@
     <div class="anime-grid" id="animeGrid">
 
       <a href="JJKS3.html" class="anime-card">
-        <img src="jjks3.jfif" alt="To Be Hero X cover">
+        <img src="jjks3.jpg" alt="To Be Hero X cover">
         <div class="card-body">
           <div class="card-title">Jujutsu Kaisen Season 3</div>
           <span class="card-badge">Season 1 • 24 Episodes</span>
@@ -54,7 +58,7 @@
       </a>
 
       <a href="TBH X.html" class="anime-card">
-        <img src="TBH X.jfif" alt="To Be Hero X cover">
+        <img src="tbhx.png" alt="To Be Hero X cover">
         <div class="card-body">
           <div class="card-title">To Be Hero X</div>
           <span class="card-badge">Season 1 • 24 Episodes</span>
@@ -133,6 +137,17 @@
 
     // Initialise
     filterCards();
+
+    // ─── Theme toggle ────────────────────────────────────────────────────────
+    var themeBtn = document.getElementById('themeToggle');
+    var htmlEl = document.documentElement;
+    themeBtn.textContent = htmlEl.getAttribute('data-theme') === 'light' ? '🌙' : '☀️';
+    themeBtn.addEventListener('click', function () {
+      var next = htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      htmlEl.setAttribute('data-theme', next);
+      localStorage.setItem('animeTheme', next);
+      themeBtn.textContent = next === 'light' ? '🌙' : '☀️';
+    });
   </script>
 
 </body>
