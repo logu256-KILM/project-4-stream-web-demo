@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Be Hero X — αηιмєѕ தமிழ்</title>
+  <meta name="description" content="Watch To Be Hero X Season 1 all episodes in Tamil on αηιмєѕ தமிழ்.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ====== VIDEO MODAL ====== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(10, 10, 20, 0.92);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.25s ease;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .modal-box {
+      position: relative;
+      width: 92vw;
+      max-width: 900px;
+      background: linear-gradient(145deg, #0f1e3a, #1a1a2e);
+      border: 1px solid rgba(135,206,235,0.3);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(135,206,235,0.15), 0 24px 80px rgba(0,0,0,0.7);
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    /* Top bar */
+    .modal-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: rgba(135,206,235,0.06);
+      border-bottom: 1px solid rgba(135,206,235,0.15);
+    }
+    .modal-ep-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--sky-blue);
+      letter-spacing: 0.5px;
+    }
+    .modal-close {
+      background: rgba(255,107,107,0.15);
+      border: 1px solid var(--light-red);
+      color: var(--light-red);
+      font-size: 1.1rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .modal-close:hover {
+      background: var(--light-red);
+      color: #fff;
+      box-shadow: 0 0 14px rgba(255,107,107,0.5);
+    }
+
+    /* Video iframe wrapper — 16:9 */
+    .modal-video-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #000;
+    }
+    .modal-video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Bottom controls */
+    .modal-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: rgba(176,108,245,0.05);
+      border-top: 1px solid rgba(176,108,245,0.15);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .modal-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Outfit', Arial, sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+    .btn-prev {
+      background: rgba(176,108,245,0.15);
+      color: var(--purple);
+      border: 1px solid var(--purple);
+    }
+    .btn-prev:hover {
+      background: var(--purple);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(176,108,245,0.4);
+    }
+    .btn-next {
+      background: rgba(135,206,235,0.15);
+      color: var(--sky-blue);
+      border: 1px solid var(--sky-blue);
+    }
+    .btn-next:hover {
+      background: var(--sky-blue-dark);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(135,206,235,0.4);
+    }
+    .btn-prev:disabled,
+    .btn-next:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .modal-ep-counter {
+      font-size: 0.82rem;
+      color: rgba(135,206,235,0.6);
+      text-align: center;
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== VIDEO MODAL ===== -->
+  <div class="modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalEpTitle">
+    <div class="modal-box">
+      <div class="modal-topbar">
+        <div class="modal-ep-title" id="modalEpTitle">Episode</div>
+        <button class="modal-close" id="modalClose" title="Close (Esc)">✕</button>
+      </div>
+      <div class="modal-video-wrap">
+        <iframe id="modalIframe" src="" allowfullscreen allow="autoplay"></iframe>
+      </div>
+      <div class="modal-controls">
+        <button class="modal-nav-btn btn-prev" id="btnPrev">◀ Previous</button>
+        <div class="modal-ep-counter" id="epCounter">1 / 24</div>
+        <button class="modal-nav-btn btn-next" id="btnNext">Next ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">αηιмєѕ தமிழ்</a>
+    <ul class="nav-links">
+      <li><a href="index.html">🏠 Home</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== PAGE CONTENT ===== -->
+  <div class="page-wrapper">
+
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <!-- SHOW HEADER -->
+    <div class="show-header">
+      <img src="TBH X.jfif" alt="To Be Hero X">
+      <div class="show-info">
+        <h1>TO BE HERO X</h1>
+        <p style="color:var(--text-sky); margin-top:8px; font-size:0.95rem;">
+          Season 1 &nbsp;•&nbsp; 24 Episodes &nbsp;•&nbsp; 2024
+        </p>
+        <div class="genre-tags">
+          <span class="genre-tag action">Action</span>
+          <span class="genre-tag anime">Anime</span>
+          <span class="genre-tag hero">Super Hero</span>
+        </div>
+        <p style="color:var(--text-purple); margin-top:14px; font-size:0.88rem; max-width:400px; line-height:1.5;">
+          Click any episode below to watch it right here — no new tab needed. 🎬
+        </p>
+      </div>
+    </div>
+
+    <!-- EPISODE LIST -->
+    <div class="section-title">Season 1 Episodes</div>
+
+    <ul class="episode-list" id="episodeList">
+      <!-- Episodes injected by JS below -->
+    </ul>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Made with <span>♥</span> for Tamil anime fans &nbsp;|&nbsp; αηιмєѕ தமிழ்</p>
+    <p class="copyright">&copy; 2025 <span class="copy-brand">αηιмєѕ தமிழ்</span>. All rights reserved. Unauthorized reproduction or distribution is prohibited.</p>
+  </footer>
+
+  <script>
+    // ─── Episode data (file ID extracted from Google Drive share links) ───────
+    const episodes = [
+      { id: '1aDM9WOWj0uw4_XA_JuujED69q20lyw7Z' },
+      { id: '12SYFTh1LF3JzqepHv7y1mfV6B5_B_kmV' },
+      { id: '1wtZXuQr23oYUPuA-XVu_GI76oA54sX0z' },
+      { id: '1iyJ3iq72eMB4dl7x9ClA8mqz0kRQawL6' },
+      { id: '1XgpLOpXWZhZwVDYb4mWtzMReMeGheAzo' },
+      { id: '1_-n5WFDjWXw5LSobapSW_ui_ncltq2Jt' },
+      { id: '1yK5p5uPRDet2X0EotQOcoizbvia5Sn38' },
+      { id: '1D_gJi8YgssXNAB5JRuEN6LTO8eP6jD11' },
+      { id: '1sIXNLjEDry6CsNntrfohrOI6VBh_I3SF' },
+      { id: '1_fSZ2E0ZCBDO0iljb7dW1mr764sm4Rm6' },
+      { id: '1ad0OY2n7ibR60ymOXJsjumIQ5AESiCd2' },
+      { id: '1IXFocVMtX8QyC8hmVVNhNLV54bFRdemE' },
+      { id: '1oya7Lnvyoo3V6wd49TbNAPLemZ30DPnX' },
+      { id: '1xpWkaXvapoQYP08rpIS0ubXqczDPFqdV' },
+      { id: '115_qyJRp2ECIQhIMdTwRYSOEZYt6lHcb'  },
+      { id: '1vKbxDzoUa9g83TA3g7RMAh6nL9CEwSww' },
+      { id: '16Wb6ew4fTjY9Cm06b267VDIZ23RxDowT' },
+      { id: '1ixkdfIiDQeTfzr3lFd0vVv1cmMQWx-dB' },
+      { id: '1TPVOXlelwIvKsXaxq_faV5NEu82woUmb' },
+      { id: '1Npr1ubjwof89c9PydJBZuxhs4p1Yi0Go' },
+      { id: '1ecjs9d_pyS5_2BUEOBnT-uvB06tEZIo6' },
+      { id: '1Ce4OOa_bMdDB4d8Jbfw2dbfytQH3D36_' },
+      { id: '1Ce4OOa_bMdDB4d8Jbfw2dbfytQH3D36_' },
+      { id: '1INd4d1siYe3OAq-l9JJ9GzVujqFwa3lZ' },
+    ];
+
+    const total = episodes.length;
+    let currentEp = 0;
+
+    // ─── Build episode list ────────────────────────────────────────────────────
+    const list = document.getElementById('episodeList');
+    episodes.forEach((ep, i) => {
+      const epNum = String(i + 1).padStart(2, '0');
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <a href="#" class="ep-link" data-index="${i}">
+          <span class="ep-number">${epNum}</span>
+          To Be Hero X — Season 1 Episode ${i + 1}
+          <span class="ep-icon">▶</span>
+        </a>`;
+      list.appendChild(li);
+    });
+
+    // ─── Modal elements ───────────────────────────────────────────────────────
+    const modal      = document.getElementById('videoModal');
+    const iframe     = document.getElementById('modalIframe');
+    const modalTitle = document.getElementById('modalEpTitle');
+    const epCounter  = document.getElementById('epCounter');
+    const btnPrev    = document.getElementById('btnPrev');
+    const btnNext    = document.getElementById('btnNext');
+    const btnClose   = document.getElementById('modalClose');
+
+    function embedUrl(fileId) {
+      return `https://drive.google.com/file/d/${fileId}/preview`;
+    }
+
+    function openEpisode(index) {
+      currentEp = index;
+      const ep = episodes[index];
+      modalTitle.textContent = `To Be Hero X — Season 1 Episode ${index + 1}`;
+      epCounter.textContent  = `${index + 1} / ${total}`;
+      iframe.src = embedUrl(ep.id);
+      btnPrev.disabled = index === 0;
+      btnNext.disabled = index === total - 1;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // Highlight active episode in list
+      document.querySelectorAll('.ep-link').forEach(a => a.classList.remove('ep-active'));
+      document.querySelectorAll('.ep-link')[index].classList.add('ep-active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      iframe.src = '';
+      document.body.style.overflow = '';
+      document.querySelectorAll('.ep-link').forEach(a => a.classList.remove('ep-active'));
+    }
+
+    // ─── Event listeners ──────────────────────────────────────────────────────
+    list.addEventListener('click', e => {
+      const link = e.target.closest('.ep-link');
+      if (!link) return;
+      e.preventDefault();
+      openEpisode(parseInt(link.dataset.index));
+    });
+
+    btnPrev.addEventListener('click', () => { if (currentEp > 0) openEpisode(currentEp - 1); });
+    btnNext.addEventListener('click', () => { if (currentEp < total - 1) openEpisode(currentEp + 1); });
+    btnClose.addEventListener('click', closeModal);
+
+    // Close on overlay click (outside the box)
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+    // Close on Escape key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
+  </script>
+
+  <style>
+    /* Active episode highlight */
+    .ep-link.ep-active {
+      background: rgba(135, 206, 235, 0.12) !important;
+      border-color: var(--sky-blue) !important;
+      color: var(--sky-blue) !important;
+    }
+    .ep-link.ep-active::before { opacity: 1 !important; }
+    .ep-link.ep-active .ep-icon { opacity: 1 !important; }
+  </style>
+
+</body>
+</html>

@@ -14,7 +14,6 @@
     <a href="index.html" class="logo">αηιмєѕ தமிழ்</a>
     <ul class="nav-links">
       <li><a href="index.html">🏠 Home</a></li>
-      <li><a href="index1.html">▶ To Be Hero X</a></li>
     </ul>
   </nav>
 
@@ -27,10 +26,37 @@
       <p style="color:var(--text-purple);">Watch the best anime — dubbed &amp; subbed in Tamil 🎌</p>
     </section>
 
-    <!-- ANIME GRID -->
-    <div class="anime-grid">
+    <!-- SEARCH BAR -->
+    <div class="search-wrap">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="animeSearch"
+          class="search-input"
+          placeholder="Search anime…"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button class="search-clear" id="searchClear" title="Clear" aria-label="Clear search">✕</button>
+      </div>
+      <p class="search-no-results" id="searchNoResults" style="display:none;">
+        No anime found for "<span id="searchQuery"></span>" 😢
+      </p>
+    </div>
 
-      <a href="index1.html" class="anime-card">
+    <!-- ANIME GRID -->
+    <div class="anime-grid" id="animeGrid">
+
+      <a href="JJKS3.html" class="anime-card">
+        <img src="jjks3.jfif" alt="To Be Hero X cover">
+        <div class="card-body">
+          <div class="card-title">Jujutsu Kaisen Season 3</div>
+          <span class="card-badge">Season 1 • 24 Episodes</span>
+        </div>
+      </a>
+
+      <a href="TBH X.html" class="anime-card">
         <img src="TBH X.jfif" alt="To Be Hero X cover">
         <div class="card-body">
           <div class="card-title">To Be Hero X</div>
@@ -67,6 +93,47 @@
     <p>Made with <span>♥</span> for Tamil anime fans &nbsp;|&nbsp; αηιмєѕ தமிழ்</p>
     <p class="copyright">&copy; 2025 <span class="copy-brand">αηιмєѕ தமிழ்</span>. All rights reserved. Unauthorized reproduction or distribution is prohibited.</p>
   </footer>
+
+  <script>
+    const searchInput   = document.getElementById('animeSearch');
+    const searchClear   = document.getElementById('searchClear');
+    const noResults     = document.getElementById('searchNoResults');
+    const searchQuery   = document.getElementById('searchQuery');
+
+    // Only real anime cards (those with an href) are searchable
+    const cards = Array.from(document.querySelectorAll('#animeGrid .anime-card[href]'));
+
+    function filterCards() {
+      const q = searchInput.value.trim().toLowerCase();
+      searchClear.style.display = q ? 'flex' : 'none';
+
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+        const match = title.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) visibleCount++;
+      });
+
+      if (q && visibleCount === 0) {
+        noResults.style.display = 'block';
+        searchQuery.textContent = searchInput.value.trim();
+      } else {
+        noResults.style.display = 'none';
+      }
+    }
+
+    searchInput.addEventListener('input', filterCards);
+
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.focus();
+      filterCards();
+    });
+
+    // Initialise
+    filterCards();
+  </script>
 
 </body>
 </html>
