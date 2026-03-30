@@ -10,6 +10,11 @@
     <script>/* apply saved theme before paint */
         (function () { var t = localStorage.getItem('animeTheme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();
     </script>
+    <!-- Vercel Web Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
     <style>
         /* ====== VIDEO MODAL ====== */
         .modal-overlay {
